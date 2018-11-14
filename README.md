@@ -4,6 +4,29 @@
 
 This Kata was presented at XP2006 by EmmanuelGaillot and ChristopheThibaut.
 
+## The Story So Far
+
+I have a solution for the first two user stories outlines below. I've done this
+in JavaScript, which is not my strongest language. There are test cases copied
+from the sample below. These first two user cases are the easiest to be sure.
+The third is also an easy follow-on of just processing several lines of account
+numbers. Right now it only processes one at a time.
+
+The last case where you're trying to guess the correct account number seems
+computationally intensive. My suggestion is to go the recursive route. If the
+account doesn't have a valid checksum, you'll need to go digit by digit and try
+to see if there are simple modifications that could be made to get a valid
+checksum. So for each digit, you'd have to try the other six alternatives for
+each segment and then recalculate the account number. Assuming there is only one
+error in the whole account number there would be 6*9 account numbers tried. If
+there could be more than one error (like maybe one per digit), then the number
+of tries would become very large.
+
+As a client paying for this software, my recommendation would be to make some
+simple assumptions (like only one error in the whole account number) and then
+see what kinds of error rates you get in production before spending too much
+money pursuing a perfect solution.
+
 ## Problem Description
 
 ### User Story 1
