@@ -1,13 +1,13 @@
 function scan(input) {
   let lines = input.split('\n');
   if (lines[0] === "") { lines.shift(); };
-  digits(lines[0], lines[1], lines[2]);
-  return '000000000';
+  return digits(lines[0], lines[1], lines[2]).join('');
 };
 
 function digits(line1, line2, line3) {
-  var digits = [];
-  for(var i = 0; i < 12; i = i+3) {
+  let digits = [],
+      length = Math.max(line1.length, line2.length, line3.length);
+  for(var i = 0; i < length; i = i+3) {
     let line1Chars = line1.slice(i, i+3),
         line2Chars = line2.slice(i, i+3),
         line3Chars = line3.slice(i, i+3);
@@ -17,7 +17,7 @@ function digits(line1, line2, line3) {
 }
 
 function parseDigit(line1, line2, line3) {
-  ["0", "1"].find(function(number) {
+  return ["0", "1", "2","3","4","5","6","7","8","9"].find(function(number) {
     return matchers[number](line1, line2, line3);
   });
 }
@@ -36,12 +36,59 @@ matchers["1"] = matcherBuilder(`
   |
 `);
 
+
+matchers["2"] = matcherBuilder(`
+ _ 
+ _|
+|_ 
+`);
+
+matchers["3"] = matcherBuilder(`
+ _ 
+ _|
+ _|
+`);
+
+matchers["4"] = matcherBuilder(`
+   
+|_|
+  |
+`);
+
+matchers["5"] = matcherBuilder(`
+ _ 
+|_ 
+ _|
+`);
+
+matchers["6"] = matcherBuilder(`
+ _ 
+|_ 
+|_|
+`);
+
+matchers["7"] = matcherBuilder(`
+ _ 
+  |
+  |
+`);
+
+matchers["8"] = matcherBuilder(`
+ _ 
+|_|
+|_|
+`);
+
+matchers["9"] = matcherBuilder(`
+ _ 
+|_|
+ _|
+`);
+
 function matcherBuilder(digit) {
   return function(line1, line2, line3) {
     let input = [line1, line2, line3].join("\n").trim(),
         match = digit.trim();
-    console.log("'" + input + "'");
-    console.log("'" + match + "'");
     return input === match;
   };
 };
