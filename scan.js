@@ -1,3 +1,21 @@
+/*
+  account number:  3  4  5  8  8  2  8  6  5
+  position names:  d9 d8 d7 d6 d5 d4 d3 d2 d1
+
+  checksum calculation:
+
+  (d1 + 2*d2 + 3*d3 +..+ 9*d9) mod 11 = 0
+
+*/
+function validChecksum(account) {
+  var productSum = 0;
+  let digits = account.split('').reverse();
+  digits.forEach(function(digit, index) {
+    productSum += parseInt(digit) * (index + 1);
+  });
+  return productSum % 11 === 0;
+};
+
 function scan(input) {
   let lines = input.split('\n');
   if (lines[0] === "") { lines.shift(); };
@@ -21,6 +39,14 @@ function parseDigit(line1, line2, line3) {
     return matchers[number](line1, line2, line3);
   });
 }
+
+function matcherBuilder(digit) {
+  return function(line1, line2, line3) {
+    let input = [line1, line2, line3].join("\n").trim(),
+        match = digit.trim();
+    return input === match;
+  };
+};
 
 var matchers = [];
 
@@ -84,32 +110,6 @@ matchers["9"] = matcherBuilder(`
 |_|
  _|
 `);
-
-function matcherBuilder(digit) {
-  return function(line1, line2, line3) {
-    let input = [line1, line2, line3].join("\n").trim(),
-        match = digit.trim();
-    return input === match;
-  };
-};
-
-/*
-  account number:  3  4  5  8  8  2  8  6  5
-  position names:  d9 d8 d7 d6 d5 d4 d3 d2 d1
-
-  checksum calculation:
-
-  (d1 + 2*d2 + 3*d3 +..+ 9*d9) mod 11 = 0
-
-*/
-function validChecksum(account) {
-  var productSum = 0;
-  let digits = account.split('').reverse();
-  digits.forEach(function(digit, index) {
-    productSum += parseInt(digit) * (index + 1);
-  });
-  return productSum % 11 === 0;
-};
 
 module.exports = {scan, validChecksum};
 
