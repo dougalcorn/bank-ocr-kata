@@ -6,6 +6,15 @@ test("matches all zero", () => {
 | || || || || || || || || |
 |_||_||_||_||_||_||_||_||_|
 
-`.trim();
+`;
   expect(scan(input)).toBe('000000000');
+});
+test("matches all ones", () => {
+  let input = `
+
+  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |
+
+`;
+  expect(scan(input)).toBe('111111111');
 });
