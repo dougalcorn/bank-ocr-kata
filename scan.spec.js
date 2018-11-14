@@ -1,4 +1,4 @@
-var scan = require('./scan');
+var {scan, validChecksum} = require('./scan');
 
 test("matches all zero", () => {
   let input = `
@@ -97,4 +97,12 @@ test("matches all digits mixed", () => {
 
 `;
   expect(scan(input)).toBe('123456789');
+});
+
+test("validates account checksum correct", function() {
+  expect(validChecksum("345882865")).toBe(true);
+});
+
+test("validates an invalid account checksum", function() {
+  expect(validChecksum("664371495")).toBe(false);
 });

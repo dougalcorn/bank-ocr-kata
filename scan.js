@@ -93,5 +93,23 @@ function matcherBuilder(digit) {
   };
 };
 
-module.exports = scan;
+/*
+  account number:  3  4  5  8  8  2  8  6  5
+  position names:  d9 d8 d7 d6 d5 d4 d3 d2 d1
+
+  checksum calculation:
+
+  (d1 + 2*d2 + 3*d3 +..+ 9*d9) mod 11 = 0
+
+*/
+function validChecksum(account) {
+  var productSum = 0;
+  let digits = account.split('').reverse();
+  digits.forEach(function(digit, index) {
+    productSum += parseInt(digit) * (index + 1);
+  });
+  return productSum % 11 === 0;
+};
+
+module.exports = {scan, validChecksum};
 

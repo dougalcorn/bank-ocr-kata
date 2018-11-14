@@ -31,7 +31,7 @@ position names:  d9 d8 d7 d6 d5 d4 d3 d2 d1
 
 checksum calculation:
 
-(d1 + 2\*d2 + 3\*d3 +..+ 9\*d9) mod 11 = 0
+(d1 + 2*d2 + 3*d3 +..+ 9\*d9) mod 11 = 0
 
 So now you should also write some code that calculates the checksum
 for a given number, and identifies if it is a valid account number.
