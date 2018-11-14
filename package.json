@@ -1,0 +1,14 @@
+{
+  "name": "bank-ocr-kata",
+  "version": "1.0.0",
+  "description": "Bank OCR kata",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Doug Alcorn",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}
